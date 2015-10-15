@@ -8,10 +8,9 @@
 
 #import "XUTabBarController.h"
 #import "XUHomeTableController.h"
-#import "XUDealTableController.h"
+#import "XUDealViewController.h"
 #import "XUBusinessTableController.h"
 #import "XUMyTableController.h"
-
 @interface XUTabBarController ()
 
 @end
@@ -23,7 +22,7 @@
     XUHomeTableController *homeVC = [[XUHomeTableController alloc]init];
     UINavigationController *homeNav = [[UINavigationController alloc]initWithRootViewController:homeVC];
     
-    XUDealTableController *dealVC = [[XUDealTableController alloc]init];
+    XUDealViewController *dealVC = [[XUDealViewController alloc]init];
     UINavigationController *dealNav = [[UINavigationController alloc]initWithRootViewController:dealVC];
     
     XUBusinessTableController *businessVC = [[XUBusinessTableController alloc]init];

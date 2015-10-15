@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class XUCategory, XdDeal;
+@class XUCategory, XUDeal;
 
 @interface XUMetaTool : NSObject
 
@@ -21,7 +21,7 @@
  *  返回所有的分类数据
  */
 + (NSArray *)categories;
-+ (XUCategory *)categoryWithDeal:(XdDeal *)deal;
++ (XUCategory *)categoryWithDeal:(XUDeal *)deal;
 
 /**
  *  返回所有的排序数据

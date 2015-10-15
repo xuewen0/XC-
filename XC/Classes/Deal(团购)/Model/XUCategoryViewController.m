@@ -40,44 +40,44 @@
     return [XUMetaTool categories].count;
 }
 
-- (NSString *)homeDropdown:(XUHomeDropdown *)homeDropdown titleForRowInMainTable:(int)row
+- (NSString *)homeDropdown:(XUHomeDropdown *)homeDropdown titleForRowInMainTable:(NSInteger)row
 {
     XUCategory *category = [XUMetaTool categories][row];
     return category.name;
 }
 
-- (NSString *)homeDropdown:(XUHomeDropdown *)homeDropdown iconForRowInMainTable:(int)row
+- (NSString *)homeDropdown:(XUHomeDropdown *)homeDropdown iconForRowInMainTable:(NSInteger)row
 {
     XUCategory *category = [XUMetaTool categories][row];
     return category.small_icon;
 }
 
-- (NSString *)homeDropdown:(XUHomeDropdown *)homeDropdown selectedIconForRowInMainTable:(int)row
+- (NSString *)homeDropdown:(XUHomeDropdown *)homeDropdown selectedIconForRowInMainTable:(NSInteger)row
 {
     XUCategory *category = [XUMetaTool categories][row];
     return category.small_highlighted_icon;
 }
 
-- (NSArray *)homeDropdown:(XUHomeDropdown *)homeDropdown subdataForRowInMainTable:(int)row
+- (NSArray *)homeDropdown:(XUHomeDropdown *)homeDropdown subdataForRowInMainTable:(NSInteger)row
 {
     XUCategory *category = [XUMetaTool categories][row];
     return category.subcategories;
 }
 
 #pragma mark - MTHomeDropdownDelegate
-- (void)homeDropdown:(XUHomeDropdown *)homeDropdown didSelectRowInMainTable:(int)row
+- (void)homeDropdown:(XUHomeDropdown *)homeDropdown didSelectRowInMainTable:(NSInteger)row
 {
-//    XUCategory *category = [XUMetaTool categories][row];
-//    if (category.subcategories.count == 0) {
-//        // 发出通知
-//        [XUNotificationCenter postNotificationName:XUCategoryDidChangeNotification object:nil userInfo:@{XUSelectCategory : category}];
-//    }
+    XUCategory *category = [XUMetaTool categories][row];
+    if (category.subcategories.count == 0) {
+        // 发出通知
+        [XUNotificationCenter postNotificationName:XUCategoryDidChangeNotification object:nil userInfo:@{XUSelectCategory : category}];
+    }
 }
 
-- (void)homeDropdown:(XUHomeDropdown *)homeDropdown didSelectRowInSubTable:(int)subrow inMainTable:(int)mainRow
+- (void)homeDropdown:(XUHomeDropdown *)homeDropdown didSelectRowInSubTable:(NSInteger)subrow inMainTable:(NSInteger)mainRow
 {
-//    XUCategory *category = [XUMetaTool categories][mainRow];
-//    // 发出通知
-//    [XUNotificationCenter postNotificationName:XUCategoryDidChangeNotification object:nil userInfo:@{XUSelectCategory : category,XUSelectSubcategoryName : category.subcategories[subrow]}];
+    XUCategory *category = [XUMetaTool categories][mainRow];
+    // 发出通知
+    [XUNotificationCenter postNotificationName:XUCategoryDidChangeNotification object:nil userInfo:@{XUSelectCategory : category,XUSelectSubcategoryName : category.subcategories[subrow]}];
 }
 @end

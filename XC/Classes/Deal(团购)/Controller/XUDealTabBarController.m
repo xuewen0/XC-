@@ -32,13 +32,18 @@
 
 static const NSInteger TagOffset = 1000;
 @interface XUDealTabBarController ()
-@property (nonatomic,strong) UIView *tabButtonsContainerView;    //分栏按钮内容视图
-@property (nonatomic,strong)UIView *contentContainerView;       //下来菜单内容视图
-@property (nonatomic,strong)UIView *shadowView;                 //阴影部分
-@property (nonatomic,strong)UIImageView *indicatorImageView;    //选中的图标^
-
-@property (nonatomic,assign)CGRect frameRect;                    //视图初始化Fream
-@property (nonatomic,assign)BOOL contentIsDisplay;              //是否显示下来菜单
+//分栏按钮内容视图
+@property (nonatomic,strong) UIView *tabButtonsContainerView;
+//下拉菜单内容视图
+@property (nonatomic,strong)UIView *contentContainerView;
+//阴影部分
+@property (nonatomic,strong)UIView *shadowView;
+//选中的图标^
+@property (nonatomic,strong)UIImageView *indicatorImageView;
+//视图初始化Fream
+@property (nonatomic,assign)CGRect frameRect;
+//是否显示下拉菜单
+@property (nonatomic,assign)BOOL contentIsDisplay;
 
 @end
 
@@ -55,32 +60,29 @@ static const NSInteger TagOffset = 1000;
 	[super viewDidLoad];
     
     if (CGRectIsEmpty(self.frameRect)) {
-        self.frameRect = CGRectMake(0, 64, self.view.width, 300);
+        self.frameRect = CGRectMake(0, 64, self.view.frame.size.width, 300);
     }
-    self.view.frame=CGRectMake(0, 0, self.view.width, 64+TABBAR_HEIGHT);
+    self.view.frame=CGRectMake(0, 0, self.view.frame.size.width, 64+TABBAR_HEIGHT);
+    //宽高自适应
     self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    
-    //设置shadowView
-    self.shadowView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height)];
+    //设置阴影部分
+    self.shadowView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.height)];
     self.shadowView.layer.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.1].CGColor;
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]
                                           initWithTarget:self action:@selector(handleTap:)];
     [self.shadowView addGestureRecognizer:tapGesture];
     self.shadowView.hidden=YES;
     [self.view addSubview:self.shadowView];
-    
     //分栏按钮内容视图
 	CGRect rect = CGRectMake(self.frameRect.origin.x, self.frameRect.origin.y, self.frameRect.size.width, TABBAR_HEIGHT);
 	self.tabButtonsContainerView = [[UIView alloc] initWithFrame:rect];
 	self.tabButtonsContainerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    
-    //下来菜单内容视图
+    [self.view addSubview:self.tabButtonsContainerView];
+    //下拉菜单内容视图
     rect.origin.y = self.frameRect.origin.y + TABBAR_HEIGHT;
     rect.size.height = self.frameRect.size.height - TABBAR_HEIGHT;
 	self.contentContainerView = [[UIView alloc] initWithFrame:rect];
-    [self.view addSubview:self.contentContainerView];
-	[self.view addSubview:self.tabButtonsContainerView];
-
+	[self.view addSubview:self.contentContainerView];
     //设置标记image选中的图标^
 	self.indicatorImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"团购_全部分类_美食_11@2x.png"]];
     [self.view addSubview:self.indicatorImageView];
@@ -98,12 +100,12 @@ static const NSInteger TagOffset = 1000;
 {
 	NSUInteger index = 0;
 	NSUInteger count = self.viewControllers.count;
-	CGRect rect = CGRectMake(0.0f, 0.0f, self.view.width / count, self.tabBarHeight);
+	CGRect rect = CGRectMake(0, 0, self.view.width / count, self.tabBarHeight);
 	NSArray *buttons = self.tabButtonsContainerView.subviews;
 	for (UIButton *button in buttons)
 	{
             rect.size.width = self.view.width / count;
-            button.frame = rect;
+            button.frame = rect ;
             rect.origin.x += rect.size.width;
 		if (index == self.selectedIndex)
             //设置标记图片的位置

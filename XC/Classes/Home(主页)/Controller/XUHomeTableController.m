@@ -38,7 +38,7 @@
 }
 
 
-#pragma mark - 监听城市改变通知
+#pragma mark - 监听通知
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     //监听城市改变通知

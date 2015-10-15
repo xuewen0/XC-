@@ -24,11 +24,11 @@
     return [[[NSBundle mainBundle] loadNibNamed:@"XUHomeDropdown" owner:nil options:nil] firstObject];
 }
 
-- (void)awakeFromNib
-{
-    // 不需要跟随父控件的尺寸变化而伸缩
-    self.autoresizingMask = UIViewAutoresizingNone;
-}
+//- (void)awakeFromNib
+//{
+//    // 不需要跟随父控件的尺寸变化而伸缩
+//    self.autoresizingMask = UIViewAutoresizingNone;
+//}
 
 #pragma mark - 数据源方法
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -78,7 +78,6 @@
         self.selectedMainRow = indexPath.row;
         // 刷新右边的数据
         [self.subTableView reloadData];
-        
         // 通知代理
         if ([self.delegate respondsToSelector:@selector(homeDropdown:didSelectRowInMainTable:)]) {
             [self.delegate homeDropdown:self didSelectRowInMainTable:indexPath.row];

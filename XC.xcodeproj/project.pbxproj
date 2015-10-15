@@ -32,6 +32,8 @@
 		851F537F1BC2A6FA005F5036 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 851F53771BC2A6FA005F5036 /* UIWebView+AFNetworking.m */; settings = {ASSET_TAGS = (); }; };
 		851F53821BC2A732005F5036 /* XUWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 851F53811BC2A732005F5036 /* XUWebViewController.m */; settings = {ASSET_TAGS = (); }; };
 		851F53851BC2A769005F5036 /* XUBusinessTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 851F53841BC2A769005F5036 /* XUBusinessTableViewController.m */; settings = {ASSET_TAGS = (); }; };
+		85216F7A1BCFCDDA0093CD19 /* XUDealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85216F781BCFCDDA0093CD19 /* XUDealViewController.m */; settings = {ASSET_TAGS = (); }; };
+		85216F7B1BCFCDDA0093CD19 /* XUDealViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85216F791BCFCDDA0093CD19 /* XUDealViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		8525C2A11BC398C900C2D12E /* XUHomeDropdown.m in Sources */ = {isa = PBXBuildFile; fileRef = 8525C29B1BC398C900C2D12E /* XUHomeDropdown.m */; settings = {ASSET_TAGS = (); }; };
 		8525C2A21BC398C900C2D12E /* XUHomeDropdown.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8525C29C1BC398C900C2D12E /* XUHomeDropdown.xib */; settings = {ASSET_TAGS = (); }; };
 		8525C2A31BC398C900C2D12E /* XUHomeDropdownMainCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8525C29E1BC398C900C2D12E /* XUHomeDropdownMainCell.m */; settings = {ASSET_TAGS = (); }; };
@@ -129,7 +131,6 @@
 		85DB42A11BC1135B0003E6FF /* XUWelcomeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85DB429F1BC1135B0003E6FF /* XUWelcomeController.m */; settings = {ASSET_TAGS = (); }; };
 		85DB42A41BC1136F0003E6FF /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 85DB42A31BC1136F0003E6FF /* UIView+Extension.m */; settings = {ASSET_TAGS = (); }; };
 		85DB42A71BC114500003E6FF /* XUBusinessTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85DB42A61BC114500003E6FF /* XUBusinessTableController.m */; settings = {ASSET_TAGS = (); }; };
-		85DB42AA1BC114680003E6FF /* XUDealTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85DB42A91BC114680003E6FF /* XUDealTableController.m */; settings = {ASSET_TAGS = (); }; };
 		85DB42AD1BC114740003E6FF /* XUHomeTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85DB42AC1BC114740003E6FF /* XUHomeTableController.m */; settings = {ASSET_TAGS = (); }; };
 		85DB42B01BC1147E0003E6FF /* XUMyTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85DB42AF1BC1147E0003E6FF /* XUMyTableController.m */; settings = {ASSET_TAGS = (); }; };
 		85DB42B31BC118B60003E6FF /* XUHomeHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 85DB42B21BC118B60003E6FF /* XUHomeHeadView.m */; settings = {ASSET_TAGS = (); }; };
@@ -225,6 +226,9 @@
 		851F53811BC2A732005F5036 /* XUWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XUWebViewController.m; sourceTree = "<group>"; };
 		851F53831BC2A769005F5036 /* XUBusinessTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XUBusinessTableViewController.h; sourceTree = "<group>"; };
 		851F53841BC2A769005F5036 /* XUBusinessTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XUBusinessTableViewController.m; sourceTree = "<group>"; };
+		85216F771BCFCDDA0093CD19 /* XUDealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XUDealViewController.h; sourceTree = "<group>"; };
+		85216F781BCFCDDA0093CD19 /* XUDealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XUDealViewController.m; sourceTree = "<group>"; };
+		85216F791BCFCDDA0093CD19 /* XUDealViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XUDealViewController.xib; sourceTree = "<group>"; };
 		8525C29A1BC398C900C2D12E /* XUHomeDropdown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XUHomeDropdown.h; sourceTree = "<group>"; };
 		8525C29B1BC398C900C2D12E /* XUHomeDropdown.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XUHomeDropdown.m; sourceTree = "<group>"; };
 		8525C29C1BC398C900C2D12E /* XUHomeDropdown.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XUHomeDropdown.xib; sourceTree = "<group>"; };
@@ -349,8 +353,6 @@
 		85DB42A31BC1136F0003E6FF /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
 		85DB42A51BC114500003E6FF /* XUBusinessTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XUBusinessTableController.h; sourceTree = "<group>"; };
 		85DB42A61BC114500003E6FF /* XUBusinessTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XUBusinessTableController.m; sourceTree = "<group>"; };
-		85DB42A81BC114680003E6FF /* XUDealTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XUDealTableController.h; sourceTree = "<group>"; };
-		85DB42A91BC114680003E6FF /* XUDealTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XUDealTableController.m; sourceTree = "<group>"; };
 		85DB42AB1BC114740003E6FF /* XUHomeTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XUHomeTableController.h; sourceTree = "<group>"; };
 		85DB42AC1BC114740003E6FF /* XUHomeTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XUHomeTableController.m; sourceTree = "<group>"; };
 		85DB42AE1BC1147E0003E6FF /* XUMyTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XUMyTableController.h; sourceTree = "<group>"; };
@@ -677,8 +679,9 @@
 		85DB42871BC112140003E6FF /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				85DB42A81BC114680003E6FF /* XUDealTableController.h */,
-				85DB42A91BC114680003E6FF /* XUDealTableController.m */,
+				85216F771BCFCDDA0093CD19 /* XUDealViewController.h */,
+				85216F781BCFCDDA0093CD19 /* XUDealViewController.m */,
+				85216F791BCFCDDA0093CD19 /* XUDealViewController.xib */,
 				8525C2B51BC6951C00C2D12E /* XUDealTabBarController.h */,
 				8525C2B61BC6951C00C2D12E /* XUDealTabBarController.m */,
 				8525C2A51BC399C100C2D12E /* XUCategoryViewController.h */,
@@ -1048,6 +1051,7 @@
 				8525C32E1BC7865B00C2D12E /* 我的－登录_24@2x.png in Resources */,
 				85DB42551BC10E190003E6FF /* LaunchScreen.storyboard in Resources */,
 				8525C33E1BC7865B00C2D12E /* 首页_14@2x.png in Resources */,
+				85216F7B1BCFCDDA0093CD19 /* XUDealViewController.xib in Resources */,
 				8525C33D1BC7865B00C2D12E /* 首页_13@2x.png in Resources */,
 				8525C3311BC7865B00C2D12E /* 我的－登录_35@2x.png in Resources */,
 				8525C31C1BC7865B00C2D12E /* 团购_商户分类stare4@2x.png in Resources */,
@@ -1135,7 +1139,6 @@
 				8525C34F1BC7CF6A00C2D12E /* XUCategoryView.m in Sources */,
 				85DB42B31BC118B60003E6FF /* XUHomeHeadView.m in Sources */,
 				85DB42C91BC1497A0003E6FF /* XUSort.m in Sources */,
-				85DB42AA1BC114680003E6FF /* XUDealTableController.m in Sources */,
 				851F535D1BC2A2AB005F5036 /* AFURLConnectionOperation.m in Sources */,
 				851F53791BC2A6FA005F5036 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				851F537E1BC2A6FA005F5036 /* UIRefreshControl+AFNetworking.m in Sources */,
@@ -1177,6 +1180,7 @@
 				85DB42E31BC149DD0003E6FF /* MJConst.m in Sources */,
 				8525C2A11BC398C900C2D12E /* XUHomeDropdown.m in Sources */,
 				854453CF1BC21D0000ACB7D8 /* UIView+AutoLayout.m in Sources */,
+				85216F7A1BCFCDDA0093CD19 /* XUDealViewController.m in Sources */,
 				8525C2AF1BC399C100C2D12E /* XUSortViewController.m in Sources */,
 				8525C2B71BC6951C00C2D12E /* XUDealTabBarController.m in Sources */,
 				85DB42AD1BC114740003E6FF /* XUHomeTableController.m in Sources */,
