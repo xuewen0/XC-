@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface XURegionViewController : UIViewController
+/** 城市子区域数组  */
 @property (nonatomic, strong) NSArray *regions;
 @end

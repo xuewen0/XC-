@@ -7,76 +7,64 @@
 //
 
 #import "XUSortViewController.h"
+#import "UIView+Extension.h"
 #import "XUMetaTool.h"
 #import "XUSort.h"
-#import "UIView+Extension.h"
 #import "XUConst.h"
-
-@interface XUSortButton : UIButton
-@property (nonatomic, strong) XUSort *sort;
-@end
-
-@implementation XUSortButton
-- (instancetype)initWithFrame:(CGRect)frame
-{
-    if(self = [super initWithFrame:frame]) {
-        [self setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [self setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
-        [self setBackgroundImage:[UIImage imageNamed:@"btn_filter_normal"] forState:UIControlStateNormal];
-        [self setBackgroundImage:[UIImage imageNamed:@"btn_filter_selected"] forState:UIControlStateHighlighted];
-    }
-    return self;
-}
-
-- (void)setSort:(XUSort *)sort
-{
-    _sort = sort;
-    
-    [self setTitle:sort.label forState:UIControlStateNormal];
-}
-@end
-
-@interface XUSortViewController ()
+#import "XUHomeDropdownMainCell.h"
+@interface XUSortViewController () <UITableViewDelegate,UITableViewDataSource>
 
 @end
 
 @implementation XUSortViewController
 
-- (void)viewDidLoad {
+-(void)viewDidLoad {
     [super viewDidLoad];
-    
-    NSArray *sorts = [XUMetaTool sorts];
-    NSUInteger count = sorts.count;
-    CGFloat btnW = 100;
-    CGFloat btnH = 30;
-    CGFloat btnX = 15;
-    CGFloat btnStartY = 15;
-    CGFloat btnMargin = 15;
-    CGFloat height = 0;
-    for (NSUInteger i = 0; i<count; i++) {
-        XUSortButton *button = [[XUSortButton alloc] init];
-        // 传递模型
-        button.sort = sorts[i];
-        button.width = btnW;
-        button.height = btnH;
-        button.x = btnX;
-        button.y = btnStartY + i * (btnH + btnMargin);
-        [button addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
-        button.tag = i;
-        [self.view addSubview:button];
-        
-        height = CGRectGetMaxY(button.frame);
-    }
-    
-    // 设置控制器在popover中的尺寸
-    CGFloat width = btnW + 2 * btnX;
-    height += btnMargin;
-    self.preferredContentSize = CGSizeMake(width, height);
+    // 创建表
+    UITableView *tableView = [[UITableView alloc]init];
+    // 设置背景色、代理
+    tableView.backgroundColor = XUGlobalBg;
+    tableView.dataSource = self;
+    tableView.delegate = self;
+    // 设置表尺寸
+    CGRect rect = [UIScreen mainScreen].bounds;
+    rect.size.height = rect.size.height - 272;
+    tableView.frame = rect;
+    // 设置控制器view
+    self.view = tableView;
+
 }
 
-- (void)buttonClick:(XUSortButton *)button
-{
-    [XUNotificationCenter postNotificationName:XUSortDidChangeNotification object:nil userInfo:@{XUSelectSort : button.sort}];
+#pragma mark - UITableViewDataSource
+/**
+ *  表格有多少行
+ */
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return  [XUMetaTool sorts].count;
 }
+/**
+ *  表格每行数据
+ */
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *sortCell = @"sortCell";
+    // 创建cell
+    XUHomeDropdownMainCell *cell = [tableView dequeueReusableCellWithIdentifier:sortCell];
+    if (cell == nil) {
+        cell = [[XUHomeDropdownMainCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:sortCell];
+    }
+    XUSort *sort = [XUMetaTool sorts][indexPath.row];
+    cell.textLabel.text = sort.label;
+    return  cell;
+}
+#pragma mark - UITableViewDelegate
+/**
+ *  表格某行被选中
+ */
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    XUSort *sort = [XUMetaTool sorts][indexPath.row];
+    // 发送通知，排序改变
+    [XUNotificationCenter postNotificationName:XUSortDidChangeNotification object:nil userInfo:@{XUSelectSort : @(sort.value)}];
+}
+
 
 @end

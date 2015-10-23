@@ -7,6 +7,7 @@ NSString *const XUSortDidChangeNotification = @"XUSortDidChangeNotification";
 NSString *const XUSelectSort = @"XUSelectSort";
 
 NSString *const XUCategoryDidChangeNotification = @"XUCategoryDidChangeNotification";
+NSString *const XUSelectCategoryName = @"XUSelectCategoryName";
 NSString *const XUSelectCategory = @"XUSelectCategory";
 NSString *const XUSelectSubcategoryName = @"XUSelectSubcategoryName";
 

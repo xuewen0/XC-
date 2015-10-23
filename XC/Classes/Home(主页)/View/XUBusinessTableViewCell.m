@@ -17,7 +17,13 @@
 
 -(void)layoutSubviews{
     [super layoutSubviews];
- 
+    if(self.business.has_deal){
+        self.tuan.image = [UIImage imageNamed:@"团购_商户分类_03.png"];
+    }
+    if(self.business.has_online_reservation){
+        self.ding.image = [UIImage imageNamed:@"团购_商户分类_11.png"];
+    }
+
     self.avg_price.text = [[NSString stringWithFormat:@"%ld", (long)self.business.avg_price] stringByAppendingString:@"元"];
     self.name.text = self.business.name;
     if(0 == self.business.has_coupon ){

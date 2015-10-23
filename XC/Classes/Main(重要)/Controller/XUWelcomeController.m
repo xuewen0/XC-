@@ -72,7 +72,7 @@
     XUTabBarController *tabBar = [[XUTabBarController alloc]init];
     [self presentViewController:tabBar animated:YES completion:nil];
 }
-
+#pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     CGPoint p = scrollView.contentOffset;
     NSUInteger index = (p.x+self.view.width*0.5)/self.view.width;

@@ -11,6 +11,10 @@
 #import "XUDealViewController.h"
 #import "XUBusinessTableController.h"
 #import "XUMyTableController.h"
+
+#import "XULoginController.h"
+#import "XURegistController.h"
+#import "XURetrieveController.h"
 @interface XUTabBarController ()
 
 @end
@@ -28,9 +32,10 @@
     XUBusinessTableController *businessVC = [[XUBusinessTableController alloc]init];
     UINavigationController *businessNav = [[UINavigationController alloc]initWithRootViewController:businessVC];
     
-    XUMyTableController *myVC = [[XUMyTableController alloc]init];
+    //XUMyTableController *myVC = [[XUMyTableController alloc]init];
+    XULoginController *myVC = [[XULoginController alloc]init];
     UINavigationController *myNav = [[UINavigationController alloc]initWithRootViewController:myVC];
-    self.viewControllers = @[homeNav,dealNav,businessNav,myNav];
+    self.viewControllers = @[myNav,dealNav,businessNav,homeNav];
     
 }
 

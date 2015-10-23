@@ -24,62 +24,51 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // 创建下拉菜单
-    UIView *title = [self.view.subviews firstObject];
+    // 创建XUHomeDropdown，设置代理
     XUHomeDropdown *dropdown = [XUHomeDropdown dropdown];
-    dropdown.y = title.height;
     dropdown.dataSource = self;
     dropdown.delegate = self;
-    [self.view addSubview:dropdown];
-    
-    // 设置控制器在popover中的尺寸
-    self.preferredContentSize = CGSizeMake(dropdown.width, CGRectGetMaxY(dropdown.frame));
-    
-    
-    // 监听城市改变通知
-    [XUNotificationCenter addObserver:self selector:@selector(cityDidChangeTWO:) name:XUCityDidChangeNotification object:nil];
-    
-    if (self.selectedCityName) {
-        // 获得当前选中城市
-        XUCity *city = [[[XUMetaTool cities] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"name = %@", self.selectedCityName]] firstObject];
-        self.regions = city.regions;
-        NSLog(@"22%@",self.regions);
-    }
+    // 设置XUHomeDropdown的尺寸
+    CGRect rect = [UIScreen mainScreen].bounds;
+    rect.size.height = rect.size.height - 272;
+    dropdown.frame = rect;
+    // 设置控制器view
+    self.view = dropdown;
+    // 设置控制器背景颜色
+    self.view.backgroundColor = XUGlobalBg;
+}
 
-}
--(void)cityDidChangeTWO:(NSNotification *)notification{
-    self.selectedCityName = notification.userInfo[XUSelectCityName];
-    NSLog(@"222222%@",notification.userInfo[XUSelectCityName]);
-   //[XUNotificationCenter removeObserver:self];
-}
-/**
- *  切换城市
- */
 
 #pragma mark - MTHomeDropdownDataSource
+/**
+ *  左边表格一共有多少行
+ */
 - (NSInteger)numberOfRowsInMainTable:(XUHomeDropdown *)homeDropdown
 {
     return self.regions.count;
-    
 }
-
-- (NSString *)homeDropdown:(XUHomeDropdown *)homeDropdown titleForRowInMainTable:(int)row
+/**
+ *  左边表格每一行的标题
+ */
+- (NSString *)homeDropdown:(XUHomeDropdown *)homeDropdown titleForRowInMainTable:(NSInteger)row
 {
     XURegion *region = self.regions[row];
-    NSLog(@"%@ --- %@",region.name,region.subregions);
     return region.name;
 }
-
-- (NSArray *)homeDropdown:(XUHomeDropdown *)homeDropdown subdataForRowInMainTable:(int)row
+/**
+ *  左边表格每一行的子数据
+ */
+- (NSArray *)homeDropdown:(XUHomeDropdown *)homeDropdown subdataForRowInMainTable:(NSInteger)row
 {
     XURegion *region = self.regions[row];
-  
     return region.subregions;
 }
 
 #pragma mark - MTHomeDropdownDelegate
-- (void)homeDropdown:(XUHomeDropdown *)homeDropdown didSelectRowInMainTable:(int)row
+/**
+ *  左边表格某行被选中
+ */
+- (void)homeDropdown:(XUHomeDropdown *)homeDropdown didSelectRowInMainTable:(NSInteger)row
 {
     XURegion *region = self.regions[row];
     if (region.subregions.count == 0) {
@@ -87,8 +76,10 @@
         [XUNotificationCenter postNotificationName:XURegionDidChangeNotification object:nil userInfo:@{XUSelectRegion : region}];
     }
 }
-
-- (void)homeDropdown:(XUHomeDropdown *)homeDropdown didSelectRowInSubTable:(int)subrow inMainTable:(int)mainRow
+/**
+ *  右边表格某行被选中
+ */
+- (void)homeDropdown:(XUHomeDropdown *)homeDropdown didSelectRowInSubTable:(NSInteger)subrow inMainTable:(NSInteger)mainRow
 {
     XURegion *region = self.regions[mainRow];
     // 发出通知

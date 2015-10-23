@@ -22,6 +22,7 @@
 
 #import "XUDealTabBarController.h"
 #import "UIView+Extension.h"
+#define STATE_NAVI_HEIGHT 64
 #define TABBAR_HEIGHT 44
 #define TOPIC_FONT [UIFont fontWithName:@"简体-黑" size:11]
 #define TOPIC_COLOR [UIColor colorWithRed:0.239 green:0.753 blue:0.698 alpha:1]
@@ -58,15 +59,15 @@ static const NSInteger TagOffset = 1000;
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-    
+    //视图初始化Fream
     if (CGRectIsEmpty(self.frameRect)) {
-        self.frameRect = CGRectMake(0, 64, self.view.frame.size.width, 300);
+        self.frameRect = CGRectMake(0, STATE_NAVI_HEIGHT, self.view.frame.size.width, self.view.frame.size.height - 220);
     }
-    self.view.frame=CGRectMake(0, 0, self.view.frame.size.width, 64+TABBAR_HEIGHT);
+    self.view.frame=CGRectMake(0, 0, self.view.frame.size.width, STATE_NAVI_HEIGHT+TABBAR_HEIGHT);
     //宽高自适应
     self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     //设置阴影部分
-    self.shadowView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.height)];
+    self.shadowView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height)];
     self.shadowView.layer.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.1].CGColor;
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]
                                           initWithTarget:self action:@selector(handleTap:)];
@@ -100,11 +101,13 @@ static const NSInteger TagOffset = 1000;
 {
 	NSUInteger index = 0;
 	NSUInteger count = self.viewControllers.count;
-	CGRect rect = CGRectMake(0, 0, self.view.width / count, self.tabBarHeight);
+	CGRect rect = CGRectMake(0, 0, self.view.frame.size.width / count, self.tabBarHeight);
 	NSArray *buttons = self.tabButtonsContainerView.subviews;
 	for (UIButton *button in buttons)
 	{
-            rect.size.width = self.view.width / count;
+        if (index == count - 1){
+            rect.size.width = self.frameRect.size.width - rect.origin.x;
+        }
             button.frame = rect ;
             rect.origin.x += rect.size.width;
 		if (index == self.selectedIndex)
@@ -129,7 +132,7 @@ static const NSInteger TagOffset = 1000;
 	[self addTabButtons];
 	_selectedIndex = NSNotFound; //默认无选择
     //默认选择
-    //	NSUInteger lastIndex = _selectedIndex;
+    //	NSUIn                                                                                                                                                                                                      teger lastIndex = _selectedIndex;
     //	self.selectedIndex = lastIndex;
 }
 //添加TabButtons
@@ -147,10 +150,10 @@ static const NSInteger TagOffset = 1000;
         //中断模式例：AB...C
         button.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
 
-//		UIOffset offset = viewController.tabBarItem.titlePositionAdjustment;
-//		button.titleEdgeInsets = UIEdgeInsetsMake(offset.vertical, offset.horizontal, 0.0f, 0.0f);
-//		button.imageEdgeInsets = viewController.tabBarItem.imageInsets;
-//        
+		UIOffset offset = viewController.tabBarItem.titlePositionAdjustment;
+		button.titleEdgeInsets = UIEdgeInsetsMake(offset.vertical, offset.horizontal, 0.0f, 0.0f);
+		button.imageEdgeInsets = viewController.tabBarItem.imageInsets;
+        
 		[button setTitle:viewController.tabBarItem.title forState:UIControlStateNormal];
 		[button setImage:viewController.tabBarItem.image forState:UIControlStateNormal];
 		[button addTarget:self action:@selector(tabButtonPressed:) forControlEvents:UIControlEventTouchDown];
@@ -169,7 +172,7 @@ static const NSInteger TagOffset = 1000;
         [self setSelectedIndex:NSNotFound];
     }
     else{
-        [self setSelectedIndex:(sender.tag - TagOffset)];
+        [self setSelectedIndex:(sender.tag - TagOffset)animated:NO];
     }
 }
 
@@ -309,7 +312,7 @@ static const NSInteger TagOffset = 1000;
             
             [UIView animateWithDuration:0.5 animations:^{
                 CGRect rectTo = self.contentContainerView.frame;
-                rectTo.origin.y = rectTo.origin.y + rectTo.size.height+64+44;
+                rectTo.origin.y = rectTo.origin.y + rectTo.size.height+STATE_NAVI_HEIGHT+TABBAR_HEIGHT;
                 self.contentContainerView.frame = rectTo;
             }];
             [self setShade:YES];
@@ -388,13 +391,15 @@ static const NSInteger TagOffset = 1000;
 - (void) setShade:(BOOL) isDisplay
 {
     if (!isDisplay) {
-        self.view.frame=CGRectMake(0, 0, 320, 64+TABBAR_HEIGHT);
+        self.view.frame=CGRectMake(0, 0, self.view.width, STATE_NAVI_HEIGHT+TABBAR_HEIGHT);
         self.contentContainerView.hidden=YES;
         self.shadowView.hidden=YES;
         self.indicatorImageView.hidden=YES;
     }
     else{
-        self.view.frame=CGRectMake(0, 0, 320, 640);
+        //自定义tabbar分栏按钮等宽
+        self.view.frame=CGRectMake(0, 0, self.view.width, 1000);
+#warning 遮盖
         self.contentContainerView.hidden=NO;
         self.shadowView.hidden=NO;
         self.indicatorImageView.hidden=NO;

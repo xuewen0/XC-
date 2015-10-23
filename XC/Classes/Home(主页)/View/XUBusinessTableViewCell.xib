@@ -14,7 +14,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UZY-eA-XNe">
-                        <rect key="frame" x="126" y="11" width="186" height="21"/>
+                        <rect key="frame" x="126" y="8" width="186" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
@@ -26,7 +26,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cd8-xW-55d">
-                        <rect key="frame" x="126" y="33" width="160" height="21"/>
+                        <rect key="frame" x="126" y="33" width="45" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="8"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
@@ -40,6 +40,12 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" restorationIdentifier="cell" translatesAutoresizingMaskIntoConstraints="NO" id="Vyn-yP-S33">
                         <rect key="frame" x="5" y="6" width="111" height="80"/>
                     </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Ll-nK-vcr" userLabel="tuan">
+                        <rect key="frame" x="280" y="28" width="18" height="17"/>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bBj-Ys-Aqi" userLabel="tuan">
+                        <rect key="frame" x="247" y="28" width="18" height="17"/>
+                    </imageView>
                 </subviews>
             </tableViewCellContentView>
             <connections>
@@ -48,6 +54,7 @@
                 <outlet property="deal_count" destination="0c5-RC-zZb" id="tK7-5e-ixn"/>
                 <outlet property="name" destination="UZY-eA-XNe" id="Zvq-Bs-BOW"/>
                 <outlet property="s_photo" destination="Vyn-yP-S33" id="RT2-29-2lB"/>
+                <outlet property="tuan" destination="bBj-Ys-Aqi" id="pdL-S8-uKH"/>
             </connections>
         </tableViewCell>
     </objects>

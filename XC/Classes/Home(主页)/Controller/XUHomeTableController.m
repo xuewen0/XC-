@@ -11,21 +11,43 @@
 #import "XUHomeHeadView.h"
 #import "XUCityViewController.h"
 #import "XUConst.h"
-#import "DianpingApi.h"
 #import "XUBusinessTableViewCell.h"
 #import "XUWebViewController.h"
 #import "XUBusinessTableViewController.h"
+#import "MJRefresh.h"
+#import "DPAPI.h"
+#import "MJExtension.h"
+#import "MBProgressHUD+MJ.h"
 
 
-@interface XUHomeTableController ()
+@interface XUHomeTableController ()<DPRequestDelegate>
+/** 更换城市的名字lable */
 @property (nonatomic,strong) UILabel *cityName;
+/** 所有的团购数据 */
 @property(strong,nonatomic)NSMutableArray * businesses;
+/** 网络数据请求参数设置 */
 @property (nonatomic, strong)NSMutableDictionary *params;
+/** 记录当前页码 */
 @property (nonatomic) NSInteger currentPage;
+/** 当前选中的城市名字 */
+@property (nonatomic, copy) NSString *selectedCityName;
+/** 团购总数 */
+@property (nonatomic, assign) int  totalCount;
+/** 最后一个请求 */
+@property (nonatomic, weak) DPRequest *lastRequest;
 @end
 
 @implementation XUHomeTableController
-
+/**
+ 懒加载：所有的团购数据
+ */
+- (NSMutableArray *)businesses
+{
+    if (!_businesses) {
+        self.businesses = [[NSMutableArray alloc] init];
+    }
+    return _businesses;
+}
 //非nib创建，初始化tabBarItem
 -(id)init{
     self = [super init];
@@ -36,8 +58,6 @@
     }
     return self;
 }
-
-
 #pragma mark - 监听通知
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -46,13 +66,17 @@
     //监听分类改变通知
     [XUNotificationCenter addObserver:self selector:@selector(clickedCategory:) name:XUCategoryDidChangeNotification object:nil];
     //获取数据
-    [self getBusinesses];
+    [self loadDeals];
 }
 /**
  * 城市改变
  */
 -(void)cityDidChange:(NSNotification *)notification{
-    self.cityName.text = notification.userInfo[XUSelectCityName];
+    // 获取选择城市名称
+    self.selectedCityName = notification.userInfo[XUSelectCityName];
+    self.cityName.text = self.selectedCityName;
+    //[self.tableView  headerBeginRefreshing];
+    [self loadDeals];
     [XUNotificationCenter removeObserver:self];
 }
 /**
@@ -60,57 +84,42 @@
  */
 -(void)clickedCategory:(NSNotification *)notification{
     XUBusinessTableViewController *vc = [[XUBusinessTableViewController alloc]init];
-    vc.category = notification.userInfo[XUSelectCategory];
+    // 获取按钮点击的分类，并赋值
+    vc.category = notification.userInfo[XUSelectCategoryName];
+    vc.selectedCityName = self.selectedCityName;
+    // 推出控制器
     [self.navigationController pushViewController:vc animated:YES];
+    // 移除通知
     [XUNotificationCenter removeObserver:self];
 }
-#pragma mark -请求商户信息
--(void)getBusinesses{
-    //设置请求条件，请求商品信息
-    self.params = [NSMutableDictionary dictionary];
-    self.currentPage = 1;
-    //设置显示页面页码
-    [self.params setObject:@(self.currentPage) forKey:@"page"];
-    //设置每页最少显示团购数
-    [self.params setObject:@(5) forKey:@"limit"];
-    //设置城市
-    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
-    NSString *cityName= [userDefault objectForKey:@"cityName"];
-    //cityName如果为空，则默认北京；不为空，则为选择的城市
-    if (!cityName) {
-        cityName = @"北京";
-    }else{
-        cityName = self.cityName.text;
-    }
-    //设置对象的key ： value
-    [userDefault setObject:cityName forKey:@"cityName"];
-    //同步写入文件
-    [userDefault synchronize];
-    //请求数据
-    [DianpingApi requestBusinessWithParams:self.params AndCallback:^(id obj) {
-        self.businesses = obj;
-        //刷新表格数据
-        [self.tableView reloadData];
-    }];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     //设置导航栏背景颜色、状态栏背景颜色
     self.navigationController.navigationBar.barTintColor = TOPIC_COLOR_ORANGE;
     //自定义导航栏左侧按钮
     [self setupLeftNavItem];
+    // 设置搜索按钮
+    [self setupSearchBar];
     //创建并设置TableView表格头部视图（九宫格）frame
-    self.tableView.tableHeaderView = [[XUHomeHeadView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 220)];
+    self.tableView.tableHeaderView = [[XUHomeHeadView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 210)];
+    // 设置TableView表格头部视图背景色
     self.tableView.tableHeaderView.backgroundColor = [UIColor whiteColor];
-    
+    // 设置请求条件，请求商品信息
+    self.params = [NSMutableDictionary dictionary];
+    self.currentPage = 1;
+    // 设置显示页面页码
+    [self.params setObject:@(self.currentPage) forKey:@"page"];
+    // 添加上拉刷新，加载更多数据
+    [self.tableView addFooterWithTarget:self action:@selector(loadMoreDeals)];
+    // 添加下拉刷新，加载第一页数据
+    [self.tableView addHeaderWithTarget:self action:@selector(loadNewDeals)];
 }
 /**
  * 自定义导航栏左侧按钮
  */
 -(void)setupLeftNavItem{
     //创建切换城市按钮-按钮
-    CGRect frame = CGRectMake(0, 0,100, 44);
+    CGRect frame = CGRectMake(0, 0,50, 44);
     UIButton  *button = [[UIButton alloc]initWithFrame:frame];
     //创建切换城市按钮-名字
     UILabel *lable = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 40, 44)];
@@ -128,6 +137,110 @@
     UIBarButtonItem *regionItem = [[UIBarButtonItem alloc]initWithCustomView:button];
     //放入系统导航栏数组
     self.navigationItem.leftBarButtonItems = @[regionItem];
+}
+/**
+ * 设置中间搜索框按钮
+ */
+-(void)setupSearchBar{
+    UIButton *searchBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 50, 30)];
+    // 设置按钮图片
+    [searchBtn setImage:[UIImage imageNamed:@"首页0_03"] forState:UIControlStateNormal];
+    // 调整图像尺寸
+    UIEdgeInsets insets = {2, 10, 2, 50};
+    [searchBtn setImageEdgeInsets:insets];
+    // 添加点击事件
+    [searchBtn addTarget:self action:@selector(searchBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.titleView  = searchBtn;
+
+}
+/**
+ * 实现中间搜索框按钮点击方法
+ */
+-(void)searchBtnClick{
+    
+}
+/**
+ 加载更多数据
+ */
+- (void)loadMoreDeals
+{
+    self.currentPage++;
+    [self loadDeals];
+}
+/**
+ 加载首页数据
+ */
+- (void)loadNewDeals
+{
+    self.currentPage = 1;
+    [self loadDeals];
+}
+#pragma mark - 实现设置请求参数的方法
+-(void)setupParams:(NSMutableDictionary *)params
+{
+    // 设置请求城市
+    if (self.selectedCityName) {
+        params[@"city"] = self.selectedCityName;
+    }else{
+        // self.selectedCityName为空，设置默认城市
+        params[@"city"] = @"北京";
+    }
+}
+
+#pragma mark - 请求团购信息
+-(void)loadDeals{
+    // 创建DPAPI对象
+    DPAPI *api = [[DPAPI alloc] init];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    // 设置params可变字典参数
+    [self setupParams:params];
+    // 每页的条数
+    params[@"limit"] = @10;
+    // 页码
+    params[@"page"] = @(self.currentPage);
+    // 发送网络请求@"v1/business/find_businesses"
+    self.lastRequest = [api requestWithURL:@"v1/business/find_businesses" params:params delegate:self];
+    
+}
+#pragma mark - DPRequestDelegate方法
+/**
+ 处理服务器请求数据成功
+ */
+- (void)request:(DPRequest *)request didFinishLoadingWithResult:(id)result
+{
+    //判断是否是最后一个请求
+    if (request != self.lastRequest) return;
+    //得到请求数据总数量
+    self.totalCount = [result[@"total_count"] intValue];
+    // 1.取出团购的字典数组
+    NSArray *newDeals = [XUBusinessInfo objectArrayWithKeyValuesArray:result[@"businesses"]];
+    if (self.currentPage == 1) { // 清除之前的旧数据
+        [self.businesses removeAllObjects];
+    }
+    [self.businesses addObjectsFromArray:newDeals];
+    // 2.刷新表格
+    [self.tableView reloadData];
+    // 3.结束上拉加载、下拉加载
+    [self.tableView headerEndRefreshing];
+    [self.tableView footerEndRefreshing];
+}
+/**
+ 处理服务器数据请求失败
+ */
+- (void)request:(DPRequest *)request didFailWithError:(NSError *)error
+{
+    NSLog(@"error %@",error.userInfo);
+    //判断是否是最后一个请求
+    if (request != self.lastRequest) return;
+    // 1.提醒失败
+    [MBProgressHUD showError:@"网络繁忙,请稍后再试" toView:self.view];
+    // 2.结束刷新
+    [self.tableView headerEndRefreshing];
+    [self.tableView footerEndRefreshing];
+    // 3.如果是上拉加载失败了
+    if (self.currentPage > 1) {
+        self.currentPage--;
+    }
 }
 
 /**
@@ -165,16 +278,6 @@
     XUBusinessInfo * business = self.businesses[indexPath.row];
     //cell赋值数据模型
     cell.business = business;
-    
-    if (self.businesses.count-1==indexPath.row) {
-        [self.params setObject:@(++self.currentPage) forKey:@"page"];
-       // NSLog(@"%ld  %d   %ld",indexPath.row   ,self.businesses.count  ,self.currentPage);
-        [DianpingApi requestBusinessWithParams:self.params AndCallback:^(id obj) {
-            [self.businesses addObjectsFromArray:obj];
-            [self.tableView reloadData];
-#warning 数据一直增加
-        }];
-    }
     return cell;
 }
 #pragma mark - TableViewDelegate
@@ -203,6 +306,7 @@
  */
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    // 创建WebView控制器，展示团购数据
     XUBusinessInfo *businessInfo = self.businesses[indexPath.row];
     XUWebViewController *webView = [[XUWebViewController alloc] init];
     webView.urlString = businessInfo.business_url;

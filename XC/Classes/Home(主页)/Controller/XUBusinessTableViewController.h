@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface XUBusinessTableViewController : UITableViewController
+/** 当前选中的分类名字 */
 @property (nonatomic, copy)NSString *category;
+/** 当前选中的城市名字 */
+@property (nonatomic, copy) NSString *selectedCityName;
 @end

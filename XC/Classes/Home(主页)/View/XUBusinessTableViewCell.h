@@ -12,6 +12,8 @@
 
 @interface XUBusinessTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *s_photo;
+@property (weak, nonatomic) IBOutlet UIImageView *tuan;
+@property (weak, nonatomic) IBOutlet UIImageView *ding;
 @property (weak, nonatomic) IBOutlet UILabel *name;
 @property (weak, nonatomic) IBOutlet UILabel *coupon_description;
 @property (weak, nonatomic) IBOutlet UILabel *avg_price;
