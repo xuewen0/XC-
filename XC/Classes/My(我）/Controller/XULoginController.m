@@ -11,20 +11,13 @@
 #import "XURegisterView.h"
 #import "XURegistController.h"
 #import "XURetrieveController.h"
+#import "XUMyTableController.h"
+#import "XUConst.h"
 @interface XULoginController ()
 
 @end
 
 @implementation XULoginController
--(instancetype)init{
-    self = [super init];
-    if (self) {
-        self.title = @"我";
-        self.tabBarItem.image = [UIImage imageNamed:@"tabbar_item_more.png"];
-        self.tabBarItem.selectedImage = [UIImage imageNamed:@"tabbar_item_more_selected.png"];
-    }
-    return self;
-}
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -37,15 +30,20 @@
     XURegisterView *registerView = [[XURegisterView alloc]initwithFrame:self.view.bounds registerViewType:XURegisterViewTypeNav  loginAction:^(NSString *username, NSString *password) {
         [self loginWithUserName:username AndPassWord:password];
     } registerAction:^{
-        NSLog(@"点击了 注册");
         XURegistController *registController = [[XURegistController alloc]init];
         [self.navigationController pushViewController:registController animated:YES];
     } retrieveAction:^{
         XURetrieveController *retrieveController = [[XURetrieveController alloc]init];
         [self.navigationController pushViewController:retrieveController animated:YES];
-        NSLog(@"点击了   忘记密码");
     }];
     [self.view addSubview:registerView];
+    
+    // 创建导航栏按钮,覆盖原有返回按钮
+    UIButton *backBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 44, 44)];
+    UIBarButtonItem *regionItem = [[UIBarButtonItem alloc]initWithCustomView:backBtn];
+    // 放入系统导航栏数组
+    self.navigationItem.leftBarButtonItems = @[regionItem];
+
 }
 - (void)back {
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -65,8 +63,12 @@
         return;
     }
     if ([acc isEqualToString:@"1"]&&[key isEqualToString:@"1"]) {
-        
+        [[NSUserDefaults standardUserDefaults]setObject:@"1" forKey:@"username"];
+        [[NSUserDefaults standardUserDefaults]setObject:@"1" forKey:@"password"];
         [MBProgressHUD showSuccess:@"登陆成功      "];
+        [self dismissViewControllerAnimated:YES completion:^{
+            [MBProgressHUD showSuccess:@"登陆成功      "];
+            [XUNotificationCenter postNotificationName:XULoginStatesDidChangeNotification object:nil userInfo:@{XULogin : @"已登陆"}];        }];
     }else{
         [MBProgressHUD showError:@"用户名或密码错误          "];
     }

@@ -22,7 +22,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     XURegisterView *resetView = [[XURegisterView alloc]
                                      initwithFrame:self.view.bounds resetAction:^(NSString *passwordOne, NSString *passwordTwo) {
-                                         NSLog(@"%@%@",passwordOne,passwordTwo);
+
                                 }];
     [self.view addSubview:resetView];
     

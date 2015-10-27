@@ -105,7 +105,6 @@
     params[@"limit"] = @10;
     // 页码
     params[@"page"] = @(self.currentPage);
-    NSLog(@"%@",params);
     // 发送网络请求@"v1/business/find_businesses"
     self.lastRequest = [api requestWithURL:@"v1/business/find_businesses" params:params delegate:self];
     
@@ -182,14 +181,6 @@
     webView.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:webView animated:YES];
 }
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

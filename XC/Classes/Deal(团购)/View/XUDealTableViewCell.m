@@ -12,12 +12,13 @@
 @implementation XUDealTableViewCell
 -(void)layoutSubviews{
     [super layoutSubviews];
-    if(self.business.has_deal){
+    if(!self.business.has_deal){
         self.tuanImage.image = [UIImage imageNamed:@"团购_商户分类_03.png"];
     }
     if(self.business.has_online_reservation){
         self.dingImage.image = [UIImage imageNamed:@"团购_商户分类_11.png"];
     }
+    
     self.current_priceLabel.text = [self.deal.current_price stringByAppendingString:@"元"];
     if(self.deal.categories){
     self.deal_descriptionLabel.text = [self.deal.categories firstObject];

@@ -2,17 +2,55 @@
 //  XUMyTableController.m
 //  XC
 //
-//  Created by xue on 15/9/25.
+//  Created by xue on 15/10/25.
 //  Copyright © 2015年 xue. All rights reserved.
 //
 
 #import "XUMyTableController.h"
-
+#import "UIView+Extension.h"
+#import "XULoginController.h"
+#import "XUConst.h"
+#import "XUCollectionController.h"
+// 登录界面宽度
+#define WIN_WIDTH  [[UIScreen mainScreen] bounds].size.width
+#define NAV_STATES_BAR   64
 @interface XUMyTableController ()
+@property (nonatomic,strong) NSArray *orderArray;
+@property (nonatomic,strong) NSArray *myArray;
+@property (nonatomic,strong) NSArray *recommendArray;
+@property (nonatomic,strong) NSArray *mallArray;
 
+@property (nonatomic,strong) UILabel *label;
+@property (nonatomic,strong) UIButton *button;
 @end
 
 @implementation XUMyTableController
+
+-(NSArray*)orderArray{
+    if (!_orderArray) {
+        _orderArray = [NSArray arrayWithObjects:@"团购订单",@"预定订单",@"上门订单",@"飞机票订单", nil];
+    }
+    return _orderArray;
+}
+-(NSArray*)myArray{
+    if (!_myArray) {
+        _myArray = [NSArray arrayWithObjects:@"我的钱包",@"我的评价", nil];
+    }
+    return _myArray;
+}
+-(NSArray*)recommendArray{
+    if (!_recommendArray) {
+        _recommendArray = [NSArray arrayWithObjects:@"每日推荐", nil];
+    }
+    return _recommendArray;
+}
+-(NSArray*)mallArray{
+    if (!_mallArray) {
+        _mallArray = [NSArray arrayWithObjects:@"积分商城",@"我的抽奖",@"我的抵用劵", nil];
+    }
+    return _mallArray;
+}
+
 -(instancetype)init{
     self = [super init];
     if (self) {
@@ -22,101 +60,106 @@
     }
     return self;
 }
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [XUNotificationCenter addObserver:self selector:@selector(loginStatesDidChange:) name:XULoginStatesDidChangeNotification object:nil];
+}
+-(void)loginStatesDidChange:(NSNotification *)notification{
+    self.label.text = notification.userInfo[XULogin];
+    self.button.enabled = YES;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-}
+    NSString *username = [[NSUserDefaults standardUserDefaults]objectForKey:@"username"];
+    NSString *password = [[NSUserDefaults standardUserDefaults]objectForKey:@"password"];
+   
+    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, NAV_STATES_BAR, self.view.width, 120)];
+    // 头像
+    UIImageView *headIcon = [[UIImageView alloc]initWithFrame:CGRectMake((WIN_WIDTH - 100)/2.0, 0, 100, 100)];
+    headIcon.image = [UIImage imageNamed:@"dvq.png"];
+    // 剪辑
+    headIcon.clipsToBounds = YES;
+    // 角半径
+    headIcon.layer.cornerRadius = 50.0f;
+    [view addSubview:headIcon];
+    UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake((WIN_WIDTH - 100)/2.0, 0, 100, 120)];
+    [button addTarget:self action:@selector(login) forControlEvents:UIControlEventTouchUpInside];
+    button.backgroundColor = [UIColor clearColor];
+    [view addSubview:button];
+    self.button = button;
 
+    
+    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake((WIN_WIDTH - 100)/2.0, headIcon.height, 100, 20)];
+    if ([username isEqualToString:@"1"]&&[password isEqualToString:@"1"])
+    {
+        label.text = @"已登陆";
+        button.enabled = NO;
+        
+    }else{
+        label.text = @"请点击登陆";
+        button.enabled = YES;
+    }
+    label.textColor = [UIColor blackColor];
+    label.textAlignment = NSTextAlignmentCenter;
+    self.label = label;
+    [view addSubview:label];
+        self.tableView.tableHeaderView = view;
+}
+-(void)login{
+    XULoginController *loginVC = [[XULoginController alloc]init];
+    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:loginVC];
+    [self presentViewController:nav animated:YES completion:nil];
+//    [self.navigationController pushViewController:loginVC animated:YES];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 4;
 }
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
+    if (section == 0) {
+        return  self.orderArray.count;
+    }else if (section == 1){
+        return self.myArray.count;
+    }else if (section == 2){
+        return self.recommendArray.count;
+    }else{
+        return self.mallArray.count;
+    }
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
+    NSString *reuseIdentifier = @"cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
+    }
+    if (indexPath.section == 0 ) {
+        cell.textLabel.text = self.orderArray[indexPath.row];
+    }else if (indexPath.section == 1){
+        cell.textLabel.text = self.myArray[indexPath.row];
+    }else if (indexPath.section == 2){
+        cell.textLabel.text = self.recommendArray[indexPath.row];
+    }else{
+        cell.textLabel.text = self.mallArray[indexPath.row];
+    }
     return cell;
 }
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if ([self.label.text isEqualToString:@"已登陆"]) {
+        if (indexPath.section == 0 && indexPath.row == 0)
+        {
+            XUCollectionController *collectionVC = [[XUCollectionController alloc]init];
+             [self.navigationController pushViewController:collectionVC animated:YES];
+        }
+    }else{
+            [self login];
+        }
 }
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Table view delegate
-
-// In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here, for example:
-    // Create the next view controller.
-    <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:<#@"Nib name"#> bundle:nil];
-    
-    // Pass the selected object to the new view controller.
-    
-    // Push the view controller.
-    [self.navigationController pushViewController:detailViewController animated:YES];
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 @end

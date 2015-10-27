@@ -18,7 +18,7 @@
 #import "DPAPI.h"
 #import "MJExtension.h"
 #import "MBProgressHUD+MJ.h"
-
+#import "XUSearchViewController.h"
 
 @interface XUHomeTableController ()<DPRequestDelegate>
 /** 更换城市的名字lable */
@@ -157,6 +157,9 @@
  * 实现中间搜索框按钮点击方法
  */
 -(void)searchBtnClick{
+    XUSearchViewController *searchVC = [[XUSearchViewController alloc]init];
+    searchVC.cityName = self.selectedCityName;
+    [self.navigationController pushViewController:searchVC animated:YES];
     
 }
 /**
@@ -185,6 +188,7 @@
         // self.selectedCityName为空，设置默认城市
         params[@"city"] = @"北京";
     }
+    self.selectedCityName = params[@"city"];
 }
 
 #pragma mark - 请求团购信息
@@ -229,7 +233,6 @@
  */
 - (void)request:(DPRequest *)request didFailWithError:(NSError *)error
 {
-    NSLog(@"error %@",error.userInfo);
     //判断是否是最后一个请求
     if (request != self.lastRequest) return;
     // 1.提醒失败
@@ -309,6 +312,7 @@
     // 创建WebView控制器，展示团购数据
     XUBusinessInfo *businessInfo = self.businesses[indexPath.row];
     XUWebViewController *webView = [[XUWebViewController alloc] init];
+    webView.deal = self.businesses[indexPath.row];
     webView.urlString = businessInfo.business_url;
     webView.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:webView animated:YES];

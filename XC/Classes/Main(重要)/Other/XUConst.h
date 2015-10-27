@@ -33,3 +33,7 @@ extern NSString *const XUCollectDealKey;
 extern NSString *const XURecentStateDidChangeNotification;
 extern NSString *const XUIsRecentKey;
 extern NSString *const XURecentDealKey;
+
+extern NSString *const XULoginStatesDidChangeNotification;
+extern NSString *const XULogin;
+extern NSString *const XULogout;

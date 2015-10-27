@@ -131,6 +131,10 @@
     [self addSubview:headIcon];
     // 用户名
     UITextField *userText = [[UITextField alloc] initWithFrame:CGRectMake(SPACING, headIcon.y+headIcon.height+SPACING, WIN_WIDTH-2*SPACING, USER_TEXT_HEIGHT)];
+    userText.placeholder = @"请输入用户名";
+    // 设置输入框字体
+    SET_PLACE(userText);
+    userText.clearButtonMode = UITextFieldViewModeAlways ;
     [self addSubview:userText];
     userText.delegate = self;
     // 账户icon
@@ -146,6 +150,11 @@
     userImage.image = [UIImage imageNamed:@"textfield_default_holo_light.9.png"];
     // 密码
     UITextField *passText = [[UITextField alloc] initWithFrame:CGRectMake(SPACING, userText.y+userText.height+20, WIN_WIDTH-2*SPACING, USER_TEXT_HEIGHT)];
+    passText.placeholder = @"请输入密码";
+    // 设置输入框字体
+    SET_PLACE(passText);
+    passText.secureTextEntry = YES;
+    passText.clearButtonMode = UITextFieldViewModeAlways ;
     [self addSubview:passText];
     passText.delegate = self;
     // 密码icon
@@ -304,6 +313,10 @@
         text.clipsToBounds = YES;
         // 角半径
         text.layer.cornerRadius = 5.0;
+        // 安全文本输入
+        text.secureTextEntry = YES;
+        // 清除按钮的显示模式
+        text.clearButtonMode = UITextFieldViewModeAlways ;
         [self addSubview:text];
         text.tag = 301+i;
         
@@ -350,8 +363,9 @@
      // 找回密码 (界面)类型
     if (registerViewTypeSMS == XURegisterViewTypeNoScanfSMS) {
         // 验证码输入框
-        UITextField *passText = [[UITextField alloc] initWithFrame:CGRectMake(SPACING, TOP_Y, WIN_WIDTH-2*SPACING, USER_TEXT_HEIGHT)];
+        UITextField *passText = [[UITextField alloc] initWithFrame:CGRectMake(SPACING, TOP_Y, WIN_WIDTH/2, USER_TEXT_HEIGHT)];
         [self addSubview:passText];
+        passText.clearButtonMode = UITextFieldViewModeAlways ;
         // 验证码输入框提示文字
         passText.placeholder = promptTitle;
         SET_PLACE(passText);
@@ -378,6 +392,7 @@
         // 手机号码输入框
         UITextField *accText = [[UITextField alloc] initWithFrame:CGRectMake(SPACING, TOP_Y, WIN_WIDTH-2*SPACING, USER_TEXT_HEIGHT)];
         [self addSubview:accText];
+        accText.clearButtonMode = UITextFieldViewModeAlways ;
         accText.placeholder = @"请输入要注册的手机号码";
         SET_PLACE(accText);
         accText.tag = 501;
@@ -391,8 +406,9 @@
         [self addSubview:accImage];
         accImage.image = [UIImage imageNamed:@"textfield_default_holo_light.9.png"];
         // 验证码输入框
-        UITextField *passText = [[UITextField alloc] initWithFrame:CGRectMake(SPACING, accText.y+accText.height+10, WIN_WIDTH-2*SPACING, USER_TEXT_HEIGHT)];
+        UITextField *passText = [[UITextField alloc] initWithFrame:CGRectMake(SPACING, accText.y+accText.height+10, WIN_WIDTH/2, USER_TEXT_HEIGHT)];
         [self addSubview:passText];
+        passText.clearButtonMode = UITextFieldViewModeAlways ;
         passText.placeholder = promptTitle;
         SET_PLACE(passText);
         passText.tag = 201;

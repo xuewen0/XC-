@@ -23,3 +23,7 @@ NSString *const XUCollectDealKey = @"XUCollectDealKey";
 NSString *const XURecentStateDidChangeNotification = @"XURecentStateDidChangeNotification";
 NSString *const XUIsRecentKey = @"XUIsRecentKey";
 NSString *const XURecentDealKey = @"XURecentDealKey";
+
+NSString *const XULoginStatesDidChangeNotification = @"XULoginStatesDidChangeNotification";
+NSString *const XULogin = @"XULogin";
+NSString *const XULogout = @"XULogout";

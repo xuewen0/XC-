@@ -266,7 +266,6 @@
     // 页码
     params[@"page"] = @(self.currentPage);
     // 发送网络请求
-    NSLog(@"%@",params);
     self.lastRequest = [api requestWithURL:@"v1/deal/find_deals" params:params delegate:self];
 }
 #pragma mark - DPRequestDelegate方法
@@ -416,6 +415,7 @@
     // 创建WebView控制器，展示团购数据
     XUWebViewController *webView = [[XUWebViewController alloc] init];
     webView.urlString = ((XUDeal *)[self.deals objectAtIndex:indexPath.row]).deal_h5_url;
+    webView.deal = self.deals[indexPath.row];
     webView.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:webView animated:YES];
 }

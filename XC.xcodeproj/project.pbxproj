@@ -66,6 +66,8 @@
 		854453CC1BC21CE400ACB7D8 /* XUCityGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 854453CB1BC21CE400ACB7D8 /* XUCityGroup.m */; settings = {ASSET_TAGS = (); }; };
 		854453CF1BC21D0000ACB7D8 /* UIView+AutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 854453CE1BC21D0000ACB7D8 /* UIView+AutoLayout.m */; settings = {ASSET_TAGS = (); }; };
 		854453E21BC222B500ACB7D8 /* XUNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 854453E11BC222B500ACB7D8 /* XUNavigationController.m */; settings = {ASSET_TAGS = (); }; };
+		85D9F5041BDCB29900D0FD88 /* XUMyTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85D9F5021BDCB29900D0FD88 /* XUMyTableController.m */; settings = {ASSET_TAGS = (); }; };
+		85D9F5051BDCB29900D0FD88 /* XUMyTableController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85D9F5031BDCB29900D0FD88 /* XUMyTableController.xib */; settings = {ASSET_TAGS = (); }; };
 		85DADE9C1BD77AB500A511A0 /* 首页_0@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 85DADE8C1BD77AB500A511A0 /* 首页_0@2x.png */; settings = {ASSET_TAGS = (); }; };
 		85DADE9D1BD77AB500A511A0 /* 首页_10@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 85DADE8D1BD77AB500A511A0 /* 首页_10@2x.png */; settings = {ASSET_TAGS = (); }; };
 		85DADE9E1BD77AB500A511A0 /* 首页_11@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 85DADE8E1BD77AB500A511A0 /* 首页_11@2x.png */; settings = {ASSET_TAGS = (); }; };
@@ -109,7 +111,6 @@
 		85DB42A41BC1136F0003E6FF /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 85DB42A31BC1136F0003E6FF /* UIView+Extension.m */; settings = {ASSET_TAGS = (); }; };
 		85DB42A71BC114500003E6FF /* XUBusinessTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85DB42A61BC114500003E6FF /* XUBusinessTableController.m */; settings = {ASSET_TAGS = (); }; };
 		85DB42AD1BC114740003E6FF /* XUHomeTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85DB42AC1BC114740003E6FF /* XUHomeTableController.m */; settings = {ASSET_TAGS = (); }; };
-		85DB42B01BC1147E0003E6FF /* XUMyTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85DB42AF1BC1147E0003E6FF /* XUMyTableController.m */; settings = {ASSET_TAGS = (); }; };
 		85DB42B31BC118B60003E6FF /* XUHomeHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 85DB42B21BC118B60003E6FF /* XUHomeHeadView.m */; settings = {ASSET_TAGS = (); }; };
 		85DB42BA1BC1492B0003E6FF /* XUMetaTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 85DB42B91BC1492B0003E6FF /* XUMetaTool.m */; settings = {ASSET_TAGS = (); }; };
 		85DB42C51BC1497A0003E6FF /* XUCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 85DB42BC1BC1497A0003E6FF /* XUCategory.m */; settings = {ASSET_TAGS = (); }; };
@@ -134,6 +135,15 @@
 		85DB42F81BC14A4D0003E6FF /* sorts.plist in Resources */ = {isa = PBXBuildFile; fileRef = 85DB42F41BC14A4D0003E6FF /* sorts.plist */; settings = {ASSET_TAGS = (); }; };
 		85FF28431BDA26980015624A /* UIButton+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 85FF28421BDA26980015624A /* UIButton+Extension.m */; settings = {ASSET_TAGS = (); }; };
 		85FF28461BDA2B9D0015624A /* UITextField+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 85FF28451BDA2B9D0015624A /* UITextField+Extension.m */; settings = {ASSET_TAGS = (); }; };
+		85FF28491BDA55660015624A /* XUSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85FF28481BDA55660015624A /* XUSearchViewController.m */; settings = {ASSET_TAGS = (); }; };
+		85FF284C1BDA5F570015624A /* XUCollectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85FF284B1BDA5F570015624A /* XUCollectionController.m */; settings = {ASSET_TAGS = (); }; };
+		85FF284F1BDA613B0015624A /* XUDealTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 85FF284E1BDA613B0015624A /* XUDealTool.m */; settings = {ASSET_TAGS = (); }; };
+		85FF285C1BDA65F10015624A /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 85FF28521BDA65F10015624A /* FMDatabase.m */; settings = {ASSET_TAGS = (); }; };
+		85FF285D1BDA65F10015624A /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 85FF28541BDA65F10015624A /* FMDatabaseAdditions.m */; settings = {ASSET_TAGS = (); }; };
+		85FF285E1BDA65F10015624A /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 85FF28561BDA65F10015624A /* FMDatabasePool.m */; settings = {ASSET_TAGS = (); }; };
+		85FF285F1BDA65F10015624A /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 85FF28581BDA65F10015624A /* FMDatabaseQueue.m */; settings = {ASSET_TAGS = (); }; };
+		85FF28601BDA65F10015624A /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 85FF285B1BDA65F10015624A /* FMResultSet.m */; settings = {ASSET_TAGS = (); }; };
+		85FF28621BDA6FA20015624A /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 85FF28611BDA6FA20015624A /* libsqlite3.tbd */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -269,6 +279,9 @@
 		854453CE1BC21D0000ACB7D8 /* UIView+AutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AutoLayout.m"; sourceTree = "<group>"; };
 		854453E01BC222B500ACB7D8 /* XUNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XUNavigationController.h; sourceTree = "<group>"; };
 		854453E11BC222B500ACB7D8 /* XUNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XUNavigationController.m; sourceTree = "<group>"; };
+		85D9F5011BDCB29900D0FD88 /* XUMyTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XUMyTableController.h; sourceTree = "<group>"; };
+		85D9F5021BDCB29900D0FD88 /* XUMyTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XUMyTableController.m; sourceTree = "<group>"; };
+		85D9F5031BDCB29900D0FD88 /* XUMyTableController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XUMyTableController.xib; sourceTree = "<group>"; };
 		85DADE8C1BD77AB500A511A0 /* 首页_0@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "首页_0@2x.png"; sourceTree = "<group>"; };
 		85DADE8D1BD77AB500A511A0 /* 首页_10@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "首页_10@2x.png"; sourceTree = "<group>"; };
 		85DADE8E1BD77AB500A511A0 /* 首页_11@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "首页_11@2x.png"; sourceTree = "<group>"; };
@@ -329,8 +342,6 @@
 		85DB42A61BC114500003E6FF /* XUBusinessTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XUBusinessTableController.m; sourceTree = "<group>"; };
 		85DB42AB1BC114740003E6FF /* XUHomeTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XUHomeTableController.h; sourceTree = "<group>"; };
 		85DB42AC1BC114740003E6FF /* XUHomeTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XUHomeTableController.m; sourceTree = "<group>"; };
-		85DB42AE1BC1147E0003E6FF /* XUMyTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XUMyTableController.h; sourceTree = "<group>"; };
-		85DB42AF1BC1147E0003E6FF /* XUMyTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XUMyTableController.m; sourceTree = "<group>"; };
 		85DB42B11BC118B60003E6FF /* XUHomeHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XUHomeHeadView.h; sourceTree = "<group>"; };
 		85DB42B21BC118B60003E6FF /* XUHomeHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XUHomeHeadView.m; sourceTree = "<group>"; };
 		85DB42B81BC1492B0003E6FF /* XUMetaTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XUMetaTool.h; sourceTree = "<group>"; };
@@ -376,6 +387,24 @@
 		85FF28421BDA26980015624A /* UIButton+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Extension.m"; sourceTree = "<group>"; };
 		85FF28441BDA2B9D0015624A /* UITextField+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+Extension.h"; sourceTree = "<group>"; };
 		85FF28451BDA2B9D0015624A /* UITextField+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+Extension.m"; sourceTree = "<group>"; };
+		85FF28471BDA55660015624A /* XUSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XUSearchViewController.h; sourceTree = "<group>"; };
+		85FF28481BDA55660015624A /* XUSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XUSearchViewController.m; sourceTree = "<group>"; };
+		85FF284A1BDA5F570015624A /* XUCollectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XUCollectionController.h; sourceTree = "<group>"; };
+		85FF284B1BDA5F570015624A /* XUCollectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XUCollectionController.m; sourceTree = "<group>"; };
+		85FF284D1BDA613B0015624A /* XUDealTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XUDealTool.h; sourceTree = "<group>"; };
+		85FF284E1BDA613B0015624A /* XUDealTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XUDealTool.m; sourceTree = "<group>"; };
+		85FF28511BDA65F10015624A /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
+		85FF28521BDA65F10015624A /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
+		85FF28531BDA65F10015624A /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		85FF28541BDA65F10015624A /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		85FF28551BDA65F10015624A /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
+		85FF28561BDA65F10015624A /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
+		85FF28571BDA65F10015624A /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
+		85FF28581BDA65F10015624A /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
+		85FF28591BDA65F10015624A /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
+		85FF285A1BDA65F10015624A /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
+		85FF285B1BDA65F10015624A /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		85FF28611BDA6FA20015624A /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -383,6 +412,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85FF28621BDA6FA20015624A /* libsqlite3.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -555,6 +585,7 @@
 		85DB42391BC10E190003E6FF = {
 			isa = PBXGroup;
 			children = (
+				85FF28611BDA6FA20015624A /* libsqlite3.tbd */,
 				85DB42441BC10E190003E6FF /* XC */,
 				85DB425E1BC10E190003E6FF /* XCTests */,
 				85DB42691BC10E1A0003E6FF /* XCUITests */,
@@ -750,6 +781,8 @@
 				851F53811BC2A732005F5036 /* XUWebViewController.m */,
 				851F53831BC2A769005F5036 /* XUBusinessTableViewController.h */,
 				851F53841BC2A769005F5036 /* XUBusinessTableViewController.m */,
+				85FF28471BDA55660015624A /* XUSearchViewController.h */,
+				85FF28481BDA55660015624A /* XUSearchViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -819,6 +852,7 @@
 		85DB42911BC112140003E6FF /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				85FF28501BDA65F10015624A /* fmdb */,
 				85116CB31BD621C600A50FA7 /* Parser */,
 				85116CAA1BD60F5F00A50FA7 /* MBProgressHUD */,
 				85116C8E1BD60E9500A50FA7 /* MJRefresh */,
@@ -855,8 +889,9 @@
 		85DB42941BC112140003E6FF /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				85DB42AE1BC1147E0003E6FF /* XUMyTableController.h */,
-				85DB42AF1BC1147E0003E6FF /* XUMyTableController.m */,
+				85D9F5011BDCB29900D0FD88 /* XUMyTableController.h */,
+				85D9F5021BDCB29900D0FD88 /* XUMyTableController.m */,
+				85D9F5031BDCB29900D0FD88 /* XUMyTableController.xib */,
 				85DADEFE1BD8E51A00A511A0 /* XULoginController.h */,
 				85DADEFF1BD8E51A00A511A0 /* XULoginController.m */,
 				85DADF011BD8E56C00A511A0 /* XURegistController.h */,
@@ -865,6 +900,8 @@
 				85DADF051BD8E59900A511A0 /* XUResetController.m */,
 				85DADF071BD8E5E000A511A0 /* XURetrieveController.h */,
 				85DADF081BD8E5E000A511A0 /* XURetrieveController.m */,
+				85FF284A1BDA5F570015624A /* XUCollectionController.h */,
+				85FF284B1BDA5F570015624A /* XUCollectionController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -888,6 +925,8 @@
 		85DB42B71BC148EA0003E6FF /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				85FF284D1BDA613B0015624A /* XUDealTool.h */,
+				85FF284E1BDA613B0015624A /* XUDealTool.m */,
 				85DB42B81BC1492B0003E6FF /* XUMetaTool.h */,
 				85DB42B91BC1492B0003E6FF /* XUMetaTool.m */,
 			);
@@ -933,6 +972,24 @@
 				85DB42F41BC14A4D0003E6FF /* sorts.plist */,
 			);
 			path = Plist;
+			sourceTree = "<group>";
+		};
+		85FF28501BDA65F10015624A /* fmdb */ = {
+			isa = PBXGroup;
+			children = (
+				85FF28511BDA65F10015624A /* FMDatabase.h */,
+				85FF28521BDA65F10015624A /* FMDatabase.m */,
+				85FF28531BDA65F10015624A /* FMDatabaseAdditions.h */,
+				85FF28541BDA65F10015624A /* FMDatabaseAdditions.m */,
+				85FF28551BDA65F10015624A /* FMDatabasePool.h */,
+				85FF28561BDA65F10015624A /* FMDatabasePool.m */,
+				85FF28571BDA65F10015624A /* FMDatabaseQueue.h */,
+				85FF28581BDA65F10015624A /* FMDatabaseQueue.m */,
+				85FF28591BDA65F10015624A /* FMDB.h */,
+				85FF285A1BDA65F10015624A /* FMResultSet.h */,
+				85FF285B1BDA65F10015624A /* FMResultSet.m */,
+			);
+			path = fmdb;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1073,6 +1130,7 @@
 				85DADEA71BD77AB500A511A0 /* 首页_5@2x.png in Resources */,
 				85116CB11BD60F5F00A50FA7 /* MBProgressHUD.bundle in Resources */,
 				85DADF131BD925B900A511A0 /* irv.png in Resources */,
+				85D9F5051BDCB29900D0FD88 /* XUMyTableController.xib in Resources */,
 				85DADEA51BD77AB500A511A0 /* 首页_3@2x.png in Resources */,
 				85DADEA01BD77AB500A511A0 /* 首页_13@2x.png in Resources */,
 				85DADE9F1BD77AB500A511A0 /* 首页_12@2x.png in Resources */,
@@ -1129,6 +1187,7 @@
 				85DB42E91BC149DD0003E6FF /* MJTypeEncoding.m in Sources */,
 				85116CA51BD60E9500A50FA7 /* UIScrollView+MJRefresh.m in Sources */,
 				851F53591BC2A2AB005F5036 /* AFHTTPRequestOperationManager.m in Sources */,
+				85FF284F1BDA613B0015624A /* XUDealTool.m in Sources */,
 				851F535B1BC2A2AB005F5036 /* AFNetworkReachabilityManager.m in Sources */,
 				85DB42A41BC1136F0003E6FF /* UIView+Extension.m in Sources */,
 				851F535A1BC2A2AB005F5036 /* AFHTTPSessionManager.m in Sources */,
@@ -1136,7 +1195,6 @@
 				85DB42EF1BC14A190003E6FF /* XUBusiness.m in Sources */,
 				851F53431BC2A27C005F5036 /* XUBusinessInfo.m in Sources */,
 				85116CA11BD60E9500A50FA7 /* MJRefreshConst.m in Sources */,
-				85DB42B01BC1147E0003E6FF /* XUMyTableController.m in Sources */,
 				85DB42A01BC1135B0003E6FF /* XUTabBarController.m in Sources */,
 				851F53401BC2A23F005F5036 /* XUDeal.m in Sources */,
 				85116CA91BD60F1E00A50FA7 /* XUDealsViewController.m in Sources */,
@@ -1146,6 +1204,8 @@
 				85DADEFD1BD8E44800A511A0 /* XURegisterView.m in Sources */,
 				8525C2A31BC398C900C2D12E /* XUHomeDropdownMainCell.m in Sources */,
 				85DB42E71BC149DD0003E6FF /* MJMethod.m in Sources */,
+				85FF28601BDA65F10015624A /* FMResultSet.m in Sources */,
+				85FF28491BDA55660015624A /* XUSearchViewController.m in Sources */,
 				851F537D1BC2A6FA005F5036 /* UIProgressView+AFNetworking.m in Sources */,
 				85DB42A11BC1135B0003E6FF /* XUWelcomeController.m in Sources */,
 				85DB42E51BC149DD0003E6FF /* MJIvar.m in Sources */,
@@ -1162,12 +1222,15 @@
 				8525C2A11BC398C900C2D12E /* XUHomeDropdown.m in Sources */,
 				854453CF1BC21D0000ACB7D8 /* UIView+AutoLayout.m in Sources */,
 				85216F7A1BCFCDDA0093CD19 /* XUDealViewController.m in Sources */,
+				85FF285D1BDA65F10015624A /* FMDatabaseAdditions.m in Sources */,
 				8525C2AF1BC399C100C2D12E /* XUSortViewController.m in Sources */,
 				85DADF061BD8E59900A511A0 /* XUResetController.m in Sources */,
 				85116C8D1BD60E8C00A50FA7 /* DPRequest.m in Sources */,
+				85FF285C1BDA65F10015624A /* FMDatabase.m in Sources */,
 				8525C2B71BC6951C00C2D12E /* XUDealTabBarController.m in Sources */,
 				85DB42AD1BC114740003E6FF /* XUHomeTableController.m in Sources */,
 				85DB42C81BC1497A0003E6FF /* XURegion.m in Sources */,
+				85FF285E1BDA65F10015624A /* FMDatabasePool.m in Sources */,
 				85DB42C51BC1497A0003E6FF /* XUCategory.m in Sources */,
 				85DADF001BD8E51A00A511A0 /* XULoginController.m in Sources */,
 				851F53781BC2A6FA005F5036 /* AFNetworkActivityIndicatorManager.m in Sources */,
@@ -1175,11 +1238,13 @@
 				85116CB01BD60F5F00A50FA7 /* MBProgressHUD+MJ.m in Sources */,
 				85116CB21BD60F5F00A50FA7 /* MBProgressHUD.m in Sources */,
 				854453C91BC21CB500ACB7D8 /* UIBarButtonItem+Extension.m in Sources */,
+				85FF284C1BDA5F570015624A /* XUCollectionController.m in Sources */,
 				85116CA41BD60E9500A50FA7 /* UIScrollView+MJExtension.m in Sources */,
 				851F537A1BC2A6FA005F5036 /* UIAlertView+AFNetworking.m in Sources */,
 				85FF28461BDA2B9D0015624A /* UITextField+Extension.m in Sources */,
 				85DB42E61BC149DD0003E6FF /* MJMember.m in Sources */,
 				851F53601BC2A2AB005F5036 /* AFURLSessionManager.m in Sources */,
+				85FF285F1BDA65F10015624A /* FMDatabaseQueue.m in Sources */,
 				85DB42EA1BC149DD0003E6FF /* NSObject+MJCoding.m in Sources */,
 				85DB42E21BC149DD0003E6FF /* MJArgument.m in Sources */,
 				8525C34B1BC7C02F00C2D12E /* XUDealTableViewCell.m in Sources */,
@@ -1187,6 +1252,7 @@
 				85DB429A1BC112860003E6FF /* AppDelegate.m in Sources */,
 				851F535F1BC2A2AB005F5036 /* AFURLResponseSerialization.m in Sources */,
 				851F537C1BC2A6FA005F5036 /* UIImageView+AFNetworking.m in Sources */,
+				85D9F5041BDCB29900D0FD88 /* XUMyTableController.m in Sources */,
 				85116CA01BD60E9500A50FA7 /* MJRefreshBaseView.m in Sources */,
 				85DB42A71BC114500003E6FF /* XUBusinessTableController.m in Sources */,
 				8525C2AC1BC399C100C2D12E /* XUCategoryViewController.m in Sources */,
@@ -1320,11 +1386,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = XC/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = xue.XC;
+				PRODUCT_BUNDLE_IDENTIFIER = xiaoyaozi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -1332,11 +1401,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = XC/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = xue.XC;
+				PRODUCT_BUNDLE_IDENTIFIER = xiaoyaozi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

@@ -24,10 +24,10 @@
 {
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     [btn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
-    // 设置图片
-    [btn setImage:[UIImage imageNamed:image] forState:UIControlStateNormal];
-    [btn setImage:[UIImage imageNamed:highImage] forState:UIControlStateHighlighted];
-    // 设置尺寸
+        // 设置图片
+        [btn setImage:[UIImage imageNamed:image] forState:UIControlStateNormal];
+        [btn setImage:[UIImage imageNamed:highImage] forState:UIControlStateHighlighted];
+        // 设置尺寸
     btn.size = btn.currentImage.size;
     return [[UIBarButtonItem alloc] initWithCustomView:btn];
 }

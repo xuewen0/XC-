@@ -61,7 +61,7 @@
     }
     for(NSDictionary * dealDic in dealDics){
         XUDeal * deal = [[XUDeal alloc]init];
-        deal.deal_id = [dealDic objectForKey:@"deal_id"];
+        //deal.deal_id = [dealDic objectForKey:@"deal_id"];
         deal.title = [dealDic objectForKey:@"title"];
         deal.regions = [dealDic objectForKey:@"regions"];
         deal.current_price = [NSString stringWithFormat:@"%.1f",[[dealDic objectForKey:@"current_price"]floatValue]];

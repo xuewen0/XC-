@@ -11,6 +11,8 @@
 #import "XUBusinessInfo.h"
 
 @interface XUDealTableViewCell : UITableViewCell
+
+
 @property (weak, nonatomic) IBOutlet UIImageView *s_image;
 @property (weak, nonatomic) IBOutlet UIImageView *starImage;
 @property (weak, nonatomic) IBOutlet UIImageView *tuanImage;

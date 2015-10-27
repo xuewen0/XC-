@@ -16,7 +16,7 @@
 #import "UIView+Extension.h"
 #import "MBProgressHUD+MJ.h"
 #import "XUDealTableViewCell.h"
-//#import "XUDealTool.h"
+
 @interface XUDealsViewController () <DPRequestDelegate>
 /** 所有的团购数据 */
 @property (nonatomic, strong) NSMutableArray *deals;
@@ -32,7 +32,7 @@
 
 @implementation XUDealsViewController
 
-static NSString * const reuseIdentifier = @"deal";
+
 /** 
  懒加载
  */
@@ -58,24 +58,11 @@ static NSString * const reuseIdentifier = @"deal";
     }
     return _noDataView;
 }
-///** 
-// 初始化UICollectionViewController
-// */
-//- (instancetype)init
-//{
-//    //流动布局
-//    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-//    // 单个cell的大小
-//    layout.itemSize = CGSizeMake(305, 305);
-//    //以layout为单元创建UICollectionViewController
-//    return [self initWithCollectionViewLayout:layout];
-//}
-
+static NSString * const reuseIdentifier = @"1deal";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // 设置背景色
     self.tableView.backgroundColor = XUGlobalBg;
-    static NSString *reuseIdentifier = @"XUDealTableViewCell";
     // 注册cell
     [self.tableView registerNib:[UINib nibWithNibName:@"XUDealTableViewCell" bundle:nil] forCellReuseIdentifier:reuseIdentifier];;
     //垂直弹跳
@@ -86,20 +73,6 @@ static NSString * const reuseIdentifier = @"deal";
     [self.tableView addHeaderWithTarget:self action:@selector(loadNewDeals)];
 }
 
-///**
-// 当屏幕旋转,控制器view的尺寸发生改变调用
-// */
-//- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
-//{
-//    // 根据屏幕宽度决定列数
-//    int cols = (size.width == 1024) ? 3 : 2;
-//    // 根据列数计算collectionCell之间的内边距
-//    UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionViewLayout;
-//    CGFloat inset = (size.width - cols * layout.itemSize.width) / (cols + 1);
-//    layout.sectionInset = UIEdgeInsetsMake(inset, inset, inset, inset);
-//    // 设置每一行之间的间距
-//    layout.minimumLineSpacing = inset;
-//}
 
 #pragma mark - 跟服务器交互：发送请求，接收数据
 - (void)loadDeals
@@ -161,6 +134,7 @@ static NSString * const reuseIdentifier = @"deal";
     if (request != self.lastRequest) return;
     // 1.提醒失败
     [MBProgressHUD showError:@"网络繁忙,请稍后再试" toView:self.view];
+    NSLog(@"error %@",error.userInfo);
     // 2.结束刷新
     [self.tableView headerEndRefreshing];
     [self.tableView footerEndRefreshing];
@@ -188,6 +162,11 @@ static NSString * const reuseIdentifier = @"deal";
     return cell;
 }
 
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 90;
+}
 #pragma mark -- UICollectionViewDelegate
 //- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 //{

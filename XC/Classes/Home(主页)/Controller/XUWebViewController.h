@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "XUDeal.h"
 @interface XUWebViewController : UIViewController
 @property (copy,nonatomic) NSString *urlString;
 @property (strong,nonatomic) UIWebView *webView;
+@property (strong,nonatomic) XUDeal *deal;
 @end
