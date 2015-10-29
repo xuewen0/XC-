@@ -11,7 +11,6 @@
 #import "XUDealViewController.h"
 #import "XUBusinessTableController.h"
 #import "XUMyTableController.h"
-
 @interface XUTabBarController ()
 
 @end

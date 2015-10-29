@@ -21,7 +21,6 @@
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.clipsToBounds = YES;
     
-    
     [button setTitle:title forState:UIControlStateNormal];
     [button setTitleColor:titlecolor forState:UIControlStateNormal];
     button.backgroundColor = color;

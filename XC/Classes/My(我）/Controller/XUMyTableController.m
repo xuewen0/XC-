@@ -13,6 +13,8 @@
 #import "XUCollectionController.h"
 // 登录界面宽度
 #define WIN_WIDTH  [[UIScreen mainScreen] bounds].size.width
+
+#define TOPIC_COLOR_ORANGE [UIColor colorWithRed:247.0/255 green:135.0/255 blue:74.0/255 alpha:1.0]
 #define NAV_STATES_BAR   64
 @interface XUMyTableController ()
 @property (nonatomic,strong) NSArray *orderArray;
@@ -50,7 +52,9 @@
     }
     return _mallArray;
 }
-
+/**
+ * 初始化tabBarItem
+ */
 -(instancetype)init{
     self = [super init];
     if (self) {
@@ -60,41 +64,55 @@
     }
     return self;
 }
+/**
+ * 注册登陆状态通知
+ */
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    // 注册登陆状态通知
     [XUNotificationCenter addObserver:self selector:@selector(loginStatesDidChange:) name:XULoginStatesDidChangeNotification object:nil];
 }
+/**
+ * 登陆状态改变
+ */
 -(void)loginStatesDidChange:(NSNotification *)notification{
     self.label.text = notification.userInfo[XULogin];
     self.button.enabled = YES;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSString *username = [[NSUserDefaults standardUserDefaults]objectForKey:@"username"];
-    NSString *password = [[NSUserDefaults standardUserDefaults]objectForKey:@"password"];
-   
+      self.navigationController.navigationBar.barTintColor = TOPIC_COLOR_ORANGE;
+    [self setupLeftNavItem];
+   // 设置tableView头部试图
     UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, NAV_STATES_BAR, self.view.width, 120)];
-    // 头像
+    UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(19, view.frame.size.height-1, self.view.width - 60, 1)];
+    lineView.backgroundColor = [UIColor lightGrayColor];
+    lineView.alpha = 0.5;
+    [view addSubview:lineView];
+    // 头像图像
     UIImageView *headIcon = [[UIImageView alloc]initWithFrame:CGRectMake((WIN_WIDTH - 100)/2.0, 0, 100, 100)];
     headIcon.image = [UIImage imageNamed:@"dvq.png"];
-    // 剪辑
+    // 头像图像剪辑
     headIcon.clipsToBounds = YES;
-    // 角半径
+    // 头像图像角半径
     headIcon.layer.cornerRadius = 50.0f;
     [view addSubview:headIcon];
+    // 头像按钮
     UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake((WIN_WIDTH - 100)/2.0, 0, 100, 120)];
     [button addTarget:self action:@selector(login) forControlEvents:UIControlEventTouchUpInside];
     button.backgroundColor = [UIColor clearColor];
     [view addSubview:button];
     self.button = button;
-
-    
+    // 登录状态提示Lable
     UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake((WIN_WIDTH - 100)/2.0, headIcon.height, 100, 20)];
-    if ([username isEqualToString:@"1"]&&[password isEqualToString:@"1"])
+    // 获取本地temp文件存储的用户名、密码
+    NSString *username = [[NSUserDefaults standardUserDefaults]objectForKey:@"username"];
+    NSString *password = [[NSUserDefaults standardUserDefaults]objectForKey:@"password"];
+    // 判断用户名、密码
+    if ([username isEqualToString:@"xuewen"]&&[password isEqualToString:@"123456"])
     {
         label.text = @"已登陆";
-        button.enabled = NO;
-        
+        //button.enabled = NO;
     }else{
         label.text = @"请点击登陆";
         button.enabled = YES;
@@ -103,13 +121,37 @@
     label.textAlignment = NSTextAlignmentCenter;
     self.label = label;
     [view addSubview:label];
-        self.tableView.tableHeaderView = view;
+    // tableView头部视图
+    self.tableView.tableHeaderView = view;
 }
+-(void)setupLeftNavItem{
+    // 创建切换城市按钮
+    CGRect frame = CGRectMake(0, 0,50, 44);
+    UIButton  *button = [[UIButton alloc]initWithFrame:frame];
+    // 创建切换城市按钮-名字
+    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 40, 44)];
+    label.textColor = [UIColor whiteColor];
+    label.text = @"退出";
+    [button addSubview:label];
+    // 创建切换城市按钮-图片
+    UIImageView *imageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"首页_06"]];
+    imageView.frame = CGRectMake(40, 17, 15, 10);
+    [button addSubview:imageView];
+    // 创建切换城市按钮-点击事件
+    [button addTarget:self action:@selector(changeCity) forControlEvents:UIControlEventTouchUpInside];
+    // 创建导航栏按钮
+    UIBarButtonItem *regionItem = [[UIBarButtonItem alloc]initWithCustomView:button];
+    // 放入系统导航栏数组
+    self.navigationItem.leftBarButtonItems = @[regionItem];
+}
+
+/**
+ * 头像按钮点击方法
+ */
 -(void)login{
     XULoginController *loginVC = [[XULoginController alloc]init];
-    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:loginVC];
-    [self presentViewController:nav animated:YES completion:nil];
-//    [self.navigationController pushViewController:loginVC animated:YES];
+    [self.navigationController pushViewController:loginVC animated:YES];
+    //[self presentViewController:loginVC animated:YES completion:nil];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -150,7 +192,9 @@
     }
     return cell;
 }
-
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return  10;
+}
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if ([self.label.text isEqualToString:@"已登陆"]) {
         if (indexPath.section == 0 && indexPath.row == 0)

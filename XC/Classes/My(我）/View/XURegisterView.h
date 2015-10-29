@@ -32,7 +32,7 @@ typedef enum : NSUInteger {
             registerViewType:(XURegisterViewType)registerViewType      //登录界面类型
                         loginAction:(void (^)(NSString *username,NSString *password))loginAction  // 点击登录的回调block
                       registerAction:(void (^)(void))registerAction   // 点击注册的回调block
-                      retrieveAction:(void (^)(void))retrieveAction;  // 点击忘记的回调block
+                retrieveAction:(void (^)(void))retrieveAction qqAction:(void(^)(void))qqAction;  // 点击忘记的回调block
 
 
 // 1.找回密码 (界面)  2.输入手机号获取验证码界面

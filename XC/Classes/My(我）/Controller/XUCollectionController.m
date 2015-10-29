@@ -188,17 +188,7 @@ NSString *const XUEdit = @"编辑";
 
 - (void)collectStateChange:(NSNotification *)notification
 {
-//    if ([notification.userInfo[MTIsCollectKey] boolValue]) {
-//        // 收藏成功
-//        [self.deals insertObject:notification.userInfo[MTCollectDealKey] atIndex:0];
-//    } else {
-//        // 取消收藏成功
-//        [self.deals removeObject:notification.userInfo[MTCollectDealKey]];
-//    }
-//    
-//    [self.collectionView reloadData];
     [self.deals removeAllObjects];
-    
     self.currentPage = 0;
     [self loadMoreDeals];
 }
@@ -247,11 +237,7 @@ NSString *const XUEdit = @"编辑";
 
 //问2：行 是何种编辑样式
 -(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row == 0) {
-        return UITableViewCellEditingStyleInsert;
-    }else{
-        return UITableViewCellEditingStyleDelete;
-    }
+    return UITableViewCellEditingStyleDelete;
 }
 
 //答1 确认提交编辑动作

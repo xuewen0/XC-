@@ -13,6 +13,7 @@
 #import "XURegisterView.h"
 #import "UIView+Extension.h"
 #import "UIButton+Extension.h"
+
 // 登录界面宽度
 #define WIN_WIDTH  [[UIScreen mainScreen] bounds].size.width
 // 登录界面高度
@@ -59,6 +60,8 @@
 @property (nonatomic,copy) void (^registerAction)(void);
 /** 点击忘记密码的回调block */
 @property (nonatomic,copy) void (^retrieveAction)(void);
+/** 点击QQ登陆的回调block */
+@property (nonatomic,copy) void (^qqAction)(void);
 /** 设置、重置密码的回调block */
 @property (nonatomic,copy) void (^resetAction)(NSString *passwordOne,NSString *passwordTwo);
 /** 找回密码 (界面)、输入手机号获取验证码界面类型 */
@@ -67,11 +70,18 @@
 @property (nonatomic,copy) BOOL (^reciveAction)(NSString *phoneNumber);
 /** 点击提交、下一步的回调block */
 @property (nonatomic,copy) void (^sendAction)(NSString *testCode);
+/** 第三方登陆按钮图片数组 */
+@property (nonatomic,strong) NSArray *loginImageArray;
 @end
 
 
 @implementation XURegisterView
-
+-(NSArray *)loginImageArray{
+    if (!_loginImageArray) {
+        _loginImageArray = [NSArray arrayWithObjects:@"icon_invite_share_logo_QQ@2x",@"icon_invite_share_logo_weixin@2x",@"icon_invite_share_logo_Qzone@2x",@"icon_invite_share_logo_weixin_Friends@2x",@"icon_invite_share_logo_QQweibo@2x",@"icon_invite_share_logo_weibo@2x", nil];
+    }
+    return _loginImageArray;
+}
 - (instancetype)init
 {
     if(self = [super init]) {
@@ -98,7 +108,7 @@
 }
 
 #pragma mark - 设置登录界面
-- (instancetype )initwithFrame:(CGRect)frame registerViewType:(XURegisterViewType)registerViewType loginAction:(void (^)(NSString *, NSString *))loginAction registerAction:(void (^)(void))registerAction retrieveAction:(void (^)(void))retrieveAction
+- (instancetype )initwithFrame:(CGRect)frame registerViewType:(XURegisterViewType)registerViewType loginAction:(void (^)(NSString *, NSString *))loginAction registerAction:(void (^)(void))registerAction retrieveAction:(void (^)(void))retrieveAction qqAction:(void (^)(void))qqAction
 {
     if ([self  initWithFrame:frame]) {
         // 创建登录界面
@@ -109,6 +119,8 @@
         self.registerAction = registerAction;
         // 点击忘记密码的回调block
         self.retrieveAction = retrieveAction;
+        // 点击QQ登陆的回调block
+        self.qqAction = qqAction;
     }
     return self;
 }
@@ -179,6 +191,37 @@
     dlzcBtn.frame = CGRectMake(SPACING, loginBtn.y+loginBtn.height, BUTTON_WIDTH, BUTTON_HEIGHT);
     [self addSubview:dlzcBtn];
     
+    
+    // 第三方账号登陆按钮
+    
+    UILabel *lable = [[UILabel alloc]init];
+    lable.frame = CGRectMake(0, self.height- TOP_Y -10, self.width, BUTTON_HEIGHT);
+    lable.text = @"使用第三方账号登陆";
+    lable.textColor = [UIColor lightGrayColor];
+    lable.font = [UIFont systemFontOfSize:13];
+    lable.textAlignment = NSTextAlignmentCenter;
+    [self addSubview:lable];
+    
+    UIView *leftView = [[UIView alloc]initWithFrame:CGRectMake(SPACING, self.height- BUTTON_WIDTH - SPACING, self.width*0.25, 1)];
+    leftView.backgroundColor = [UIColor lightGrayColor];
+    UIView *rightView = [[UIView alloc]initWithFrame:CGRectMake( self.width -  self.width*0.25 - SPACING, self.height- BUTTON_WIDTH - SPACING, self.width*0.25, 1)];
+    rightView.backgroundColor = [UIColor lightGrayColor];
+    [self addSubview:leftView];
+    [self addSubview:rightView];
+    // QQ登陆
+    for (int i = 0; i < self.loginImageArray.count; i++) {
+        UIButton *QQBtn = [UIButton buttonWithTitle:@"" titleColor:COLOR_LOGIN_VIEW bgColor:nil cornerRadius:0 font:FONT(13) target:self action:@selector(QQBtnClick)];
+        QQBtn.frame = CGRectMake(5+i*self.width/self.loginImageArray.count, self.height- BUTTON_WIDTH, self.width/self.loginImageArray.count-10, self.width/self.loginImageArray.count-10);
+        [QQBtn setBackgroundImage:[UIImage imageNamed:self.loginImageArray[i]] forState:UIControlStateNormal];
+        [self addSubview:QQBtn];
+    }
+   
+//    // 微信登陆
+//    UIButton *weChatBtn = [UIButton buttonWithTitle:@"" titleColor:COLOR_LOGIN_VIEW bgColor:nil cornerRadius:0 font:FONT(13) target:self action:@selector(QQBtnClick)];
+//    weChatBtn.frame = CGRectMake(QQBtn.x + QQBtn.width + SPACING , self.height- BUTTON_WIDTH, BUTTON_HEIGHT, BUTTON_HEIGHT);
+//    [weChatBtn setBackgroundImage:[UIImage imageNamed:@"icon_invite_share_logo_weixin@2x"] forState:UIControlStateNormal];
+//    [self addSubview:weChatBtn];
+    
     // 忘记密码按钮
     UIButton *wjBtn = [UIButton buttonWithTitle:@"忘记密码" titleColor:COLOR_LOGIN_VIEW bgColor:nil cornerRadius:0 font:FONT(13) target:self action:@selector(retrieveBtnClick)];
     wjBtn.frame = CGRectMake(WIN_WIDTH-3*SPACING, loginBtn.y+loginBtn.height, BUTTON_WIDTH, BUTTON_HEIGHT);
@@ -214,6 +257,7 @@
     if (self.registerAction) {
         self.registerAction();
     }
+    
 }
 /**
  *  找回密码按钮点击事件
@@ -225,7 +269,16 @@
         self.retrieveAction();
     }
 }
-
+/**
+ *  其他登陆按钮点击事件
+ */
+-(void)QQBtnClick{
+    
+    [self endEditing:YES];
+    if (self.qqAction) {
+        self.qqAction();
+    }
+}
 #pragma mark - UITextFieldDelegate代理方法
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
